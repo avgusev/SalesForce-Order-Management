@@ -1,0 +1,37 @@
+<template>
+    <lightning-card
+            title="Search Customer Work Orders v1.0.1"
+            icon-name="custom:custom63"
+    >
+        <div class="slds-m-around_medium">
+            <lightning-layout vertical-align="end" class="slds-m-bottom_small">
+                <lightning-layout-item flexibility="grow">
+                    <lightning-input
+                            type="search"
+                            onchange={handleKeyChange}
+                            label="Search By Customer Id"
+                            value={searchKey}
+                    ></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-p-left_xx-small">
+                    <lightning-button
+                            label="Search"
+                            onclick={handleSearch}
+                    ></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <template if:true={workOrders}>
+                <template for:each={workOrders} for:item="workOrder">
+                    <p key={workOrder.Name}>Name = {workOrder.Name}</p>
+                    <p key={workOrder.Customer_Id__c}>Customer Id = {searchKey}</p>
+                    <p key={workOrder.Last_Update_Date__c}>Last Update Date = {workOrder.Last_Update_Date__c}</p>
+                    <p key={workOrder.Estimated_Completion_Date__c}>Estimated Completion Date = {workOrder.Estimated_Completion_Date__c}</p>
+                    &nbsp;
+                </template>
+            </template>
+        </div>
+        <template if:true={error}>
+            Error {error}
+        </template>
+    </lightning-card>
+</template>
